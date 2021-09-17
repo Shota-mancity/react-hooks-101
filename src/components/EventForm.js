@@ -1,4 +1,5 @@
 import React, { useState} from "react";
+import {CREATE_EVENT, DELETE_ALL_EVENTS} from "../actions"
 
 const EventForm = ({ state, dispatch }) => {
   const [title, setTitle] = useState("");
@@ -9,7 +10,7 @@ const EventForm = ({ state, dispatch }) => {
     e.preventDefault();
     // ボタンクリックの際に行われるsubmitという動作を抑止して、ページ全体の再読み込みを防ぐ
     dispatch({
-      type: "CREATE_EVENT",
+      type: CREATE_EVENT,
       title,
       body
       // title, body これらは情報として持っていないため、formから吸い上げて、dispatchの引数として渡す
@@ -21,7 +22,7 @@ const EventForm = ({ state, dispatch }) => {
   const deleteAllEvents = e => {
     e.preventDefault();
     const result = window.confirm("全て削除しますか");
-    if (result) dispatch({ type: "DELETE_ALL_EVENTS" });
+    if (result) dispatch({ type: DELETE_ALL_EVENTS });
   };
 
   const unCreatable = title === "" || body === "";
